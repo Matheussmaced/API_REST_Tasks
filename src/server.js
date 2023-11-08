@@ -1,26 +1,47 @@
 import http from 'node:http'
 import { randomUUID } from 'node:crypto';
+//import { Database } from './database';
 
-const tasks = [{
-  id: randomUUID(),
-  name: 'Nova tarefa',
-  status: true ? 'concluida' : 'Em processo'
-}];
+const tasks = []
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   const { method, url } = req
 
+  const buffers = []
+
+  for await (const chunk of req) {
+    buffers.push(chunk)
+  }
+
+  try {
+    req.body = JSON.parse(Buffer.concat(buffers).toString())
+  } catch {
+    req.body = null
+  }
+
+
   if(method === 'GET' && url === '/tasks') {
-    return res
-    .setHeader('Content-type', 'application/json')
-    .end(JSON.stringify(tasks))
+      return tasks.length > 0 ? res
+      .setHeader('Content-type', 'application/json')
+      .end(JSON.stringify(tasks))
+      :res
+      .setHeader('Content-type', 'application/json')
+      .end(JSON.stringify(tasks))
   }
 
   if(method === 'POST' && url === '/tasks') {
-    return res.writeHead(201).end('Criação de tarefa')
+    const { name, status } = req.body
+
+    tasks.push({
+      id: randomUUID(),
+      name,
+      status,
+    })
+
+    return res.writeHead(201).end()
   }
 
-  return res.writeHead(404).end('Pagina inicial')
+  return res.writeHead(404).end()
 })
 
 server.listen(3333)
