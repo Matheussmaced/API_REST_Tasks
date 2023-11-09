@@ -31,8 +31,14 @@
 <br>
 
 *Faça uma copia do projeto utilizando o comando `git clone <URL_PROJETO>`
+<br>
+
 *Instale as dependencia utilizando `npm install`
+<br>
+
 *Apos isso, execute o projeto utilizando o comando `npm run dev`
+<br>
+
 *Para fazer uso dos metodos contidos na `API` utilize um cliente como o `Insomnia`
 
 <br>
