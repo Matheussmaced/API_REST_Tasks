@@ -7,9 +7,17 @@
 <br>
 
 *Criação de uma task
+<br>
+
 *Listagem de todas as tasks
+<br>
+
 *Atualização de uma task pelo `id`
+<br>
+
 *Remover uma task pelo `id`
+<br>
+
 *Marcar pelo `id` uma task como completa
 
 <br>
