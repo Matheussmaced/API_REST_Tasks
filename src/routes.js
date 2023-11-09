@@ -29,6 +29,13 @@ export const routes = [
 
       return res.writeHead(202).end()
     }
+  },
+  {
+    method: 'DELETE',
+    path: '/tasks/:id',
+    handler: (req, res) => {
+      return res.end()
+    }
   }
 ]
 
